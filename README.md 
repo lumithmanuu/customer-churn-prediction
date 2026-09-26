@@ -1,24 +1,24 @@
 # Customer Churn Prediction
 
-A machine learning classification project that predicts whether a telecom customer is likely to churn based on customer account, service, and billing information.
+A machine learning classification project for predicting whether a telecom customer is likely to churn based on customer account, service, and billing information.
 
-The project covers the complete machine learning workflow from data exploration and preprocessing to model evaluation, hyperparameter tuning, model interpretation, and deployment using Streamlit.
+The project covers the machine learning workflow from data exploration and preprocessing to model comparison, cross-validation, hyperparameter tuning, model interpretation, and deployment using Streamlit.
 
-## Live Demo
+## 🚀 Live Demo
 
-🔗 [Try the Customer Churn Prediction App](https://customer-churn-prediction-ido8cswunbdz6usubiutrz.streamlit.app)
+[Try the Customer Churn Prediction App](https://customer-churn-prediction-ido8cswunbdz6usubiutrz.streamlit.app)
 
-## GitHub Repository
+## 🔗 Repository
 
-🔗 [Customer Churn Prediction Repository](https://github.com/lumithmanuu/customer-churn-prediction)
+[GitHub Repository](https://github.com/lumithmanuu/customer-churn-prediction)
 
 ---
 
-## Project Objective
+## 📌 Project Objective
 
-Customer churn refers to customers who stop using a company's service.
+Customer churn occurs when a customer stops using a company's service.
 
-The objective of this project is to build a machine learning model that can estimate whether a telecom customer is likely to churn based on information such as:
+The objective of this project is to develop a machine learning model that can estimate whether a telecom customer is likely to churn based on information such as:
 
 - Customer tenure
 - Contract type
@@ -26,21 +26,25 @@ The objective of this project is to build a machine learning model that can esti
 - Payment method
 - Monthly charges
 - Total charges
-- Technical support
 - Online security
-- Other subscribed services
+- Technical support
+- Streaming services
+- Other customer and account information
 
-The final trained model is deployed through a Streamlit web application where users can enter customer information and receive a churn prediction together with the predicted churn probability.
+The trained model is deployed using a Streamlit web application where users can enter customer information and receive:
+
+- A churn prediction
+- An estimated churn probability
 
 ---
 
-## Dataset
+## 📊 Dataset
 
-This project uses the **Telco Customer Churn** dataset.
+The project uses the **Telco Customer Churn** dataset.
 
-The dataset contains **7,043 customer records** and includes customer demographic information, subscribed services, billing details, and churn status.
+The dataset contains **7,043 customer records** and includes demographic, service, contract, and billing information.
 
-Example features include:
+Some of the features include:
 
 - `gender`
 - `SeniorCitizen`
@@ -67,3 +71,588 @@ The target variable is:
 
 ```text
 Churn
+```
+
+After preprocessing:
+
+```text
+0 = Customer did not churn
+1 = Customer churned
+```
+
+---
+
+## 🔄 Project Workflow
+
+The project follows these main steps:
+
+1. Data loading
+2. Dataset inspection
+3. Data cleaning
+4. Exploratory Data Analysis
+5. Feature and target preparation
+6. Train-test split
+7. Numerical feature scaling
+8. Categorical feature encoding
+9. Logistic Regression baseline
+10. Decision Tree training
+11. Random Forest training
+12. Gradient Boosting training
+13. Model evaluation
+14. Confusion matrix analysis
+15. ROC-AUC evaluation
+16. Model comparison
+17. Cross-validation
+18. Hyperparameter tuning
+19. Final model selection
+20. Model interpretation
+21. Model serialization using Joblib
+22. Prediction on new customer data
+23. Streamlit application development
+24. Cloud deployment
+
+---
+
+## 🧹 Data Cleaning
+
+Several preprocessing steps were performed before model training.
+
+### `TotalCharges`
+
+`TotalCharges` was initially stored as text and contained blank values.
+
+It was converted into a numerical feature before model training.
+
+### `customerID`
+
+`customerID` was removed because it is an identifier and does not provide useful predictive information.
+
+### Target Encoding
+
+The `Churn` column was converted from:
+
+```text
+Yes / No
+```
+
+to:
+
+```text
+1 / 0
+```
+
+---
+
+## ✂️ Train-Test Split
+
+The data was divided into:
+
+- **80% training data**
+- **20% testing data**
+
+A stratified split was used to preserve a similar churn distribution in both sets.
+
+---
+
+## ⚙️ Data Preprocessing
+
+A Scikit-learn `ColumnTransformer` was used to apply different preprocessing steps to numerical and categorical features.
+
+### Numerical Features
+
+Numerical features were transformed using:
+
+```text
+StandardScaler
+```
+
+### Categorical Features
+
+Categorical features were transformed using:
+
+```text
+OneHotEncoder
+```
+
+The encoder uses:
+
+```python
+handle_unknown="ignore"
+```
+
+to avoid prediction errors when unseen categories are encountered.
+
+---
+
+## 🔗 Machine Learning Pipeline
+
+A Scikit-learn `Pipeline` was used to combine preprocessing and classification.
+
+```text
+Raw Customer Data
+        ↓
+ColumnTransformer
+        ↓
+Numerical Features → StandardScaler
+Categorical Features → OneHotEncoder
+        ↓
+Processed Features
+        ↓
+Machine Learning Model
+        ↓
+Churn Prediction
+```
+
+Using a pipeline ensures that the same preprocessing steps are applied consistently during both training and prediction.
+
+---
+
+## 🤖 Models Evaluated
+
+Four classification algorithms were evaluated:
+
+- Logistic Regression
+- Decision Tree
+- Random Forest
+- Gradient Boosting
+
+---
+
+## 📈 Initial Model Results
+
+| Model | Accuracy | Precision | Recall | F1 Score | ROC-AUC |
+|---|---:|---:|---:|---:|---:|
+| Logistic Regression | 80.4% | 64.8% | 57.2% | 60.8% | 83.6% |
+| Decision Tree | 73.6% | 50.3% | 51.1% | 50.7% | 66.3% |
+| Random Forest | 78.3% | 61.9% | 47.9% | 54.0% | 81.3% |
+| Gradient Boosting | 79.7% | 64.3% | 52.9% | 58.1% | 83.9% |
+
+---
+
+## 🌳 Decision Tree Overfitting
+
+The Decision Tree achieved approximately:
+
+```text
+Training Accuracy: 99.9%
+Testing Accuracy: 73.6%
+```
+
+The tree also reached:
+
+```text
+Tree Depth: 24
+Number of Leaves: 1109
+```
+
+The large difference between training and testing accuracy indicated strong overfitting.
+
+---
+
+## 🌲 Random Forest Results
+
+The Random Forest achieved approximately:
+
+```text
+Training Accuracy: 99.9%
+Testing Accuracy: 78.3%
+```
+
+Although it performed better than the single Decision Tree, it still showed a large difference between training and testing performance.
+
+---
+
+## 🚀 Gradient Boosting Results
+
+Gradient Boosting achieved approximately:
+
+```text
+Training Accuracy: 83.0%
+Testing Accuracy: 79.7%
+```
+
+The smaller difference between training and testing accuracy suggested better generalization compared with the Decision Tree and Random Forest models.
+
+---
+
+## 🔁 Cross-Validation
+
+Five-fold stratified cross-validation was performed on the strongest models.
+
+### Logistic Regression
+
+Mean ROC-AUC:
+
+```text
+0.846
+```
+
+### Gradient Boosting
+
+Mean ROC-AUC:
+
+```text
+0.847
+```
+
+Both models showed consistent performance across the validation folds.
+
+---
+
+## 🔧 Hyperparameter Tuning
+
+`GridSearchCV` was used to search for improved model configurations.
+
+### Gradient Boosting
+
+Best parameters:
+
+```text
+learning_rate = 0.1
+max_depth = 2
+n_estimators = 100
+```
+
+Best cross-validation ROC-AUC:
+
+```text
+0.849
+```
+
+### Logistic Regression
+
+Best parameters:
+
+```text
+C = 10
+class_weight = None
+```
+
+Best cross-validation ROC-AUC:
+
+```text
+0.846
+```
+
+---
+
+## 🏁 Final Tuned Model Comparison
+
+| Metric | Logistic Regression | Gradient Boosting |
+|---|---:|---:|
+| Accuracy | 80.0% | 79.2% |
+| Precision | 64.0% | 63.9% |
+| Recall | 57.0% | 50.5% |
+| F1 Score | 60.3% | 56.4% |
+| ROC-AUC | 83.5% | 83.9% |
+
+---
+
+## ✅ Final Model Selection
+
+**Logistic Regression** was selected as the final model.
+
+Although Gradient Boosting achieved a slightly higher ROC-AUC, Logistic Regression achieved better:
+
+- Accuracy
+- Recall
+- F1-score
+
+Recall is particularly useful for this project because identifying customers who are actually likely to churn is important.
+
+Logistic Regression is also easier to interpret, which makes it useful for understanding how different customer characteristics influence predictions.
+
+---
+
+## 🔍 Model Interpretation
+
+The coefficients of the final Logistic Regression model were inspected to understand the relationships learned by the model.
+
+Some features with relatively strong positive coefficients included:
+
+- Fiber optic internet service
+- Month-to-month contracts
+- Higher transformed `TotalCharges`
+- Streaming TV
+- Streaming Movies
+- Multiple lines
+- Electronic check payment
+- No online security
+- No technical support
+
+Positive coefficients push the model more toward:
+
+```text
+Churn = 1
+```
+
+while negative coefficients push the model more toward:
+
+```text
+Churn = 0
+```
+
+These coefficients represent associations learned by the model and should not be interpreted as proof that a feature directly causes customer churn.
+
+---
+
+## 💾 Saved Model
+
+The final trained Scikit-learn pipeline is saved using Joblib:
+
+```text
+models/churn_model.pkl
+```
+
+Because preprocessing is included inside the pipeline, the saved model can directly accept raw customer information.
+
+```text
+New Customer Data
+        ↓
+Saved Pipeline
+        ↓
+StandardScaler + OneHotEncoder
+        ↓
+Logistic Regression
+        ↓
+Prediction
+        ↓
+Churn Probability
+```
+
+---
+
+## 🧪 Example Prediction
+
+A test customer produced the following prediction:
+
+```text
+Prediction: Churn
+Churn Probability: 78.09%
+```
+
+Prediction values are interpreted as:
+
+```text
+0 = Not predicted to churn
+1 = Predicted to churn
+```
+
+---
+
+## 🖥️ Streamlit Application
+
+The project includes an interactive Streamlit application.
+
+Users can enter customer details such as:
+
+- Gender
+- Senior citizen status
+- Partner
+- Dependents
+- Tenure
+- Phone service
+- Multiple lines
+- Internet service
+- Online security
+- Online backup
+- Device protection
+- Technical support
+- Streaming TV
+- Streaming Movies
+- Contract type
+- Paperless billing
+- Payment method
+- Monthly charges
+- Total charges
+
+The application then displays:
+
+- Churn prediction
+- Estimated churn probability
+
+### Live Application
+
+[Open the Customer Churn Prediction App](https://customer-churn-prediction-ido8cswunbdz6usubiutrz.streamlit.app)
+
+---
+
+## 🛠️ Technologies Used
+
+### Programming
+
+- Python
+
+### Data Analysis
+
+- Pandas
+- NumPy
+
+### Machine Learning
+
+- Scikit-learn
+
+### Visualization
+
+- Matplotlib
+
+### Model Serialization
+
+- Joblib
+
+### Application Development
+
+- Streamlit
+
+### Development Tools
+
+- Jupyter Notebook
+- Visual Studio Code
+- Git
+- GitHub
+
+---
+
+## 📁 Project Structure
+
+```text
+customer-churn-prediction/
+│
+├── app.py
+├── README.md
+├── requirements.txt
+├── .gitignore
+│
+├── data/
+│   └── WA_Fn-UseC_-Telco-Customer-Churn.csv
+│
+├── models/
+│   └── churn_model.pkl
+│
+└── notebooks/
+    └── 01_customer_churn_modeling.ipynb
+```
+
+> If your notebook is still named `01_eda.ipynb`, either rename it to
+> `01_customer_churn_modeling.ipynb` or update the structure above.
+
+---
+
+## ⚙️ Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/lumithmanuu/customer-churn-prediction.git
+```
+
+Move into the project directory:
+
+```bash
+cd customer-churn-prediction
+```
+
+Install the required dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## ▶️ Run the Streamlit Application
+
+Run:
+
+```bash
+streamlit run app.py
+```
+
+The application should open in your browser.
+
+---
+
+## 📦 Requirements
+
+The main Python libraries used in this project are:
+
+```text
+streamlit
+pandas
+numpy
+scikit-learn
+joblib
+matplotlib
+```
+
+---
+
+## 🎓 Key Learning Outcomes
+
+Through this project, I gained practical experience with:
+
+- Working with tabular datasets
+- Data exploration
+- Data cleaning
+- Handling incorrect and missing values
+- Exploratory Data Analysis
+- Feature and target separation
+- Train-test splitting
+- Categorical feature encoding
+- Numerical feature scaling
+- Logistic Regression
+- Decision Trees
+- Random Forests
+- Gradient Boosting
+- Scikit-learn Pipelines
+- `ColumnTransformer`
+- Classification evaluation metrics
+- Accuracy
+- Precision
+- Recall
+- F1-score
+- Confusion matrices
+- ROC curves
+- ROC-AUC
+- Detecting overfitting
+- Cross-validation
+- Hyperparameter tuning with `GridSearchCV`
+- Model comparison
+- Logistic Regression coefficient interpretation
+- Model serialization using Joblib
+- Predictions on new customer data
+- Building ML applications with Streamlit
+- Deploying a machine learning application
+- Git and GitHub workflow
+
+---
+
+## 🔮 Future Improvements
+
+Possible improvements include:
+
+- Experimenting with XGBoost, LightGBM, or CatBoost
+- Exploring classification threshold tuning to improve churn recall
+- Performing more extensive hyperparameter tuning
+- Improving feature engineering
+- Adding SHAP or other model interpretation methods
+- Improving the Streamlit user interface
+- Adding visual analytics to the application
+- Adding batch prediction using uploaded CSV files
+- Monitoring model performance on new data
+
+---
+
+## 👤 Author
+
+**Lumith Manujaya**
+
+- GitHub: [lumithmanuu](https://github.com/lumithmanuu)
+- LinkedIn: [Lumith Manujaya](https://www.linkedin.com/in/lumith-manujaya-681776300/)
+
+---
+
+## 🔗 Project Links
+
+- [GitHub Repository](https://github.com/lumithmanuu/customer-churn-prediction)
+- [Live Streamlit Application](https://customer-churn-prediction-ido8cswunbdz6usubiutrz.streamlit.app)
