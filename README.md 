@@ -1,111 +1,69 @@
 # Customer Churn Prediction
 
+A machine learning classification project that predicts whether a telecom customer is likely to churn based on customer account, service, and billing information.
+
+The project covers the complete machine learning workflow from data exploration and preprocessing to model evaluation, hyperparameter tuning, model interpretation, and deployment using Streamlit.
+
 ## Live Demo
 
 🔗 [Try the Customer Churn Prediction App](https://customer-churn-prediction-ido8cswunbdz6usubiutrz.streamlit.app)
 
-A machine learning classification project that predicts whether a telecom customer is likely to churn based on customer account, service, and billing information.
+## GitHub Repository
+
+🔗 [Customer Churn Prediction Repository](https://github.com/lumithmanuu/customer-churn-prediction)
+
+---
 
 ## Project Objective
 
-The goal of this project is to build and evaluate machine learning models for customer churn prediction and deploy the final model through a simple Streamlit web application.
+Customer churn refers to customers who stop using a company's service.
 
-## Dataset
+The objective of this project is to build a machine learning model that can estimate whether a telecom customer is likely to churn based on information such as:
 
-The project uses the Telco Customer Churn dataset.
-
-The dataset contains customer information such as:
-
-- Gender
-- Senior Citizen status
-- Tenure
-- Internet service
+- Customer tenure
 - Contract type
+- Internet service
 - Payment method
 - Monthly charges
 - Total charges
-- Churn status
+- Technical support
+- Online security
+- Other subscribed services
 
-## Project Workflow
+The final trained model is deployed through a Streamlit web application where users can enter customer information and receive a churn prediction together with the predicted churn probability.
 
-1. Data loading and exploration
-2. Data cleaning
-3. Exploratory Data Analysis
-4. Feature and target preparation
-5. Train-test split
-6. Numerical feature scaling
-7. Categorical feature encoding
-8. Model training
-9. Model evaluation
-10. Cross-validation
-11. Hyperparameter tuning
-12. Final model selection
-13. Model interpretation
-14. Streamlit deployment
+---
 
-## Models Tested
+## Dataset
 
-The following classification models were evaluated:
+This project uses the **Telco Customer Churn** dataset.
 
-- Logistic Regression
-- Decision Tree
-- Random Forest
-- Gradient Boosting
+The dataset contains **7,043 customer records** and includes customer demographic information, subscribed services, billing details, and churn status.
 
-## Model Results
+Example features include:
 
-| Model | Accuracy | Precision | Recall | F1 Score | ROC-AUC |
-|---|---:|---:|---:|---:|---:|
-| Logistic Regression | 80.4% | 64.8% | 57.2% | 60.8% | 83.6% |
-| Decision Tree | 73.6% | 50.3% | 51.1% | 50.7% | 66.3% |
-| Random Forest | 78.3% | 61.9% | 47.9% | 54.0% | 81.3% |
-| Gradient Boosting | 79.7% | 64.3% | 52.9% | 58.1% | 83.9% |
+- `gender`
+- `SeniorCitizen`
+- `Partner`
+- `Dependents`
+- `tenure`
+- `PhoneService`
+- `MultipleLines`
+- `InternetService`
+- `OnlineSecurity`
+- `OnlineBackup`
+- `DeviceProtection`
+- `TechSupport`
+- `StreamingTV`
+- `StreamingMovies`
+- `Contract`
+- `PaperlessBilling`
+- `PaymentMethod`
+- `MonthlyCharges`
+- `TotalCharges`
+- `Churn`
 
-## Final Model
+The target variable is:
 
-Logistic Regression was selected as the final model.
-
-The tuned Logistic Regression achieved approximately:
-
-- Accuracy: 80.0%
-- Precision: 64.0%
-- Recall: 57.0%
-- F1 Score: 60.3%
-- ROC-AUC: 83.5%
-
-Although Gradient Boosting achieved a slightly higher ROC-AUC, Logistic Regression achieved better recall and F1-score on the test set.
-
-## Technologies Used
-
-- Python
-- Pandas
-- NumPy
-- Scikit-learn
-- Matplotlib
-- Joblib
-- Streamlit
-- Jupyter Notebook
-
-## Machine Learning Pipeline
-
-The project uses a Scikit-learn Pipeline containing:
-
-- StandardScaler for numerical features
-- OneHotEncoder for categorical features
-- Logistic Regression classifier
-
-This allows preprocessing and prediction to be handled together.
-
-## Streamlit Application
-
-The project includes a Streamlit application where users can enter customer information and receive:
-
-- Churn prediction
-- Churn probability
-
-## Run the Project
-
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
+```text
+Churn
