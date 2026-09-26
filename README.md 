@@ -1,5 +1,9 @@
 # Customer Churn Prediction
 
+## Live Demo
+
+🔗 [Try the Customer Churn Prediction App](https://customer-churn-prediction-ido8cswunbdz6usubiutrz.streamlit.app)
+
 A machine learning classification project that predicts whether a telecom customer is likely to churn based on customer account, service, and billing information.
 
 ## Project Objective
